@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/react-datepicker": "^6.2.0",
+    "bootstrap": "^5.3.3",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
