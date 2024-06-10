@@ -5,6 +5,7 @@
       "name": "임종민",
       "img": "",
       "money": "10000",
+      "total": "10000",
       "category1": "i", //o는 출금
       "category2": "a",
       "memo": "",
