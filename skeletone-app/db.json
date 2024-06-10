@@ -5,7 +5,33 @@
       "name": "임종민",
       "img": "",
       "money": "10000",
-      "": ""
+      "category1": "i", //o는 출금
+      "category2": "a",
+      "memo": "",
+      "date": "2024-05-21",
+      "time": "15:25"
+    }
+  ],
+  "category2": [
+    {
+      "code": "a",
+      "name": "의"
+    },
+    {
+      "code": "b",
+      "name": "식"
+    },
+    {
+      "code": "c",
+      "name": "주"
+    },
+    {
+      "code": "d",
+      "name": "취미"
+    },
+    {
+      "code": "e",
+      "name": "기타"
     }
   ]
 }
