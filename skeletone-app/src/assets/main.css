@@ -23,6 +23,8 @@ body {
   margin-left: 40px;
   font-weight: 700;
   font-size: 53px;
+  text-decoration: none;
+  color: black;
 }
 
 .headerRight {
@@ -98,4 +100,9 @@ input[type='month']::-webkit-calendar-picker-indicator {
   margin: 0 auto;
   font-size: 22px;
   color: gray;
+}
+.profile {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
 }

@@ -1,6 +1,8 @@
 <template>
   <div class="profileSettings">
     <br /><br />
+    <br />
+    <br />
     <a class="profileSubject">프로필 수정</a>
     <br /><br />
     <table class="profileList">
@@ -45,16 +47,28 @@
           <th class="profileText">프로필</th>
           <td>
             <label for="profileImage" class="fileUploadButton">
-              <span class="profileFile material-symbols-outlined">
-                manage_accounts
-              </span>
+              <img id="profileDbImg" :src="store.profileImageUrl" />
             </label>
-            <input id="profileImage" type="file" style="display: none" />
+            <input
+              id="profileImage"
+              @change="handleFileUpload"
+              type="file"
+              style="display: none"
+            />
           </td>
         </tr>
       </tfoot>
     </table>
-    <br />
+    <br /><br />
+    <button
+      class="profileCancel"
+      @click="openModal"
+      :disabled="!transaction.name || !transaction.email"
+      type="button"
+    >
+      취소
+    </button>
+    &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
     <button
       @click="saveTransaction"
       :disabled="!transaction.name || !transaction.email"
@@ -64,92 +78,100 @@
       저장
     </button>
   </div>
+  <br />
+  <br />
+
+  <div id="modal" class="modal" v-show="isModalVisible">
+    <div class="modal-content">
+      <p>저장하지 않으시겠습니까?</p>
+      <br />
+      <div class="modal-buttons">
+        <button id="modalYes" @click="confirmCancel">예</button>
+        <button id="modalNo" @click="closeModal">아니요</button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { reactive, onMounted, ref } from 'vue';
+import axios from 'axios';
 import { useRouter } from 'vue-router';
+import { useProfileStore } from '@/stores/profileDate.js';
 
+const store = useProfileStore();
 const router = useRouter();
+
 const transaction = reactive({
+  id: 'user1',
   name: '',
   email: '',
+  profileImage: '',
 });
+const isModalVisible = ref(false);
 
-const saveTransaction = () => {
+const confirmCancel = () => {
+  closeModal();
+  location.reload();
+};
+
+const closeModal = () => {
+  isModalVisible.value = false;
+};
+
+const openModal = () => {
+  if (!transaction.name || !transaction.email) {
+    alert('모든 필수 항목을 입력해주세요.');
+  }
+  isModalVisible.value = true;
+};
+
+const loadTransaction = async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/account/user1');
+    const user = response.data;
+    transaction.name = user.name;
+    transaction.email = user.email;
+    transaction.profileImage = user.img;
+    store.profileImageUrl = user.img;
+  } catch (error) {
+    console.error('에러 내용:', error);
+  }
+};
+
+const handleFileUpload = (event) => {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    transaction.profileImage = e.target.result;
+    store.profileImageUrl = e.target.result;
+  };
+  reader.readAsDataURL(file);
+};
+
+const saveTransaction = async () => {
   if (!transaction.name || !transaction.email) {
     alert('모든 필수 항목을 입력해주세요.');
     return;
   }
-  router.push('/Home');
+
+  const updatedData = {
+    name: transaction.name,
+    email: transaction.email,
+    img: transaction.profileImage,
+  };
+
+  try {
+    await axios.patch(`http://localhost:3000/account/user1`, updatedData);
+    router.push({ name: 'home' });
+    location.reload();
+  } catch (error) {
+    console.error('에러 내용:', error);
+    alert('저장 중 오류가 발생했습니다.');
+  }
 };
+
+onMounted(() => {
+  loadTransaction();
+});
 </script>
-
-<style>
-.profileSettings {
-  width: 859px;
-  height: 782px;
-  background-color: white;
-  border-radius: 30px;
-  box-shadow: 10px 10px 10px 0px rgba(190, 190, 190, 0.48);
-  text-align: center;
-}
-.profileSubject {
-  font-size: 30px;
-  font-weight: 700;
-}
-
-.profileList {
-  margin: 0 auto;
-  width: 50%;
-  text-align: left;
-  border-collapse: collapse;
-}
-
-.profileText {
-  font-size: 32px;
-  font-weight: 700;
-  padding-right: 20px;
-  position: relative;
-  text-align: right;
-}
-
-.asterisk {
-  color: red;
-  font-size: 30px;
-  margin-left: -2px;
-  position: absolute;
-}
-
-.profileSubmit {
-  width: 100px;
-  height: 40px;
-  background-color: rgb(52, 152, 219);
-  color: white;
-  border: none;
-  border-radius: 20px;
-}
-.profileSubmit:disabled {
-  background-color: lightgray;
-}
-
-input[type='text'],
-input[type='email'] {
-  width: 300px;
-  height: 40px;
-}
-
-.filebox input[type='file'] {
-  position: absolute;
-  width: 0;
-  height: 0;
-  padding: 0;
-  overflow: hidden;
-  border: 0;
-}
-
-.profileFile {
-  border: 10px solid gray;
-  border-radius: 50%;
-}
-</style>
