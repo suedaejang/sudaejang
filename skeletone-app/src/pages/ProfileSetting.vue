@@ -14,6 +14,7 @@
           </th>
           <td>
             <input
+              id="profileName"
               type="text"
               name="name"
               placeholder="이름을 입력해주세요"
@@ -32,6 +33,7 @@
           </th>
           <td>
             <input
+              id="profileEmail"
               type="email"
               name="email"
               placeholder="이메일을 입력해주세요"
