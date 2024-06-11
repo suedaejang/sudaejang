@@ -2,4 +2,8 @@
 import Header from './components/Header.vue';
 </script>
 
-<template><Header /></template>
+<template>
+  <Header />
+  <br />
+  <router-view />
+</template>
