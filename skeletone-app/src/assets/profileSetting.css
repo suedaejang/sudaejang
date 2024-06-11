@@ -18,7 +18,7 @@
   height: 50px;
   border-radius: 20px;
   border: none;
-  background-color: #fbe58c;
+  background-color: rgb(255, 204, 80);
 }
 #modalNo {
   width: 100px;
@@ -67,7 +67,7 @@
 .profileSubmit {
   width: 100px;
   height: 40px;
-  background-color: #fbe58c;
+  background-color: rgb(255, 204, 80);
   color: black;
   border: none;
   border-radius: 10px;
@@ -76,7 +76,7 @@
 .profileSubmit:active {
   width: 100px;
   height: 40px;
-  background-color: #fbe58c;
+  background-color: rgb(255, 204, 80);
   color: white;
   border: 2px solid gray;
   border-radius: 10px;
