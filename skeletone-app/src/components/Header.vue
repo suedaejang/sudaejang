@@ -39,6 +39,9 @@
       </div>
     </div>
   </div>
+  <div class="pencil-container">
+    <span class="pencil material-symbols-outlined"> draft_orders </span>
+  </div>
 </template>
 
 <script setup>
