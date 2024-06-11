@@ -1,9 +1,21 @@
 <template>
   <div class="container header">
-    <a href="./home" class="headerName">가계부</a>
+    <a href="./home" class="headerName"
+      ><img
+        id="homeFont"
+        src="../assets/images/lll.PNG"
+        style="width: 100px"
+      />가계부</a
+    >
     <div class="headerRight">
       <div class="input_date_box">
-        <input type="month" data-placeholder="날짜 선택" aria-required="true" />
+        <input
+          id="month"
+          type="month"
+          data-placeholder="날짜 선택"
+          aria-required="true"
+          :value="currentTime"
+        />
       </div>
       <div class="profile-wrapper" @click="toggleDropdown" ref="profileWrapper">
         <img v-if="profileImageUrl" :src="profileImageUrl" class="profile" />
@@ -30,6 +42,7 @@
 </template>
 
 <script setup>
+import dayjs from 'dayjs';
 import { useProfileStore } from '@/stores/profileDate.js';
 import { ref, computed } from 'vue';
 import axios from 'axios';
@@ -37,6 +50,8 @@ import { useRouter } from 'vue-router';
 
 const store = useProfileStore();
 const router = useRouter();
+
+const currentTime = dayjs().format('YYYY-MM');
 
 const transaction = ref({
   id: 'user1',

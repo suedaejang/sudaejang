@@ -12,13 +12,22 @@
   text-align: center;
   padding: 20px;
 }
-
+#profileEmail {
+  font-size: 20px;
+  padding: 5px;
+  color: gray;
+}
+#profileName {
+  font-size: 20px;
+  padding: 5px;
+  color: gray;
+}
 #modalYes {
   width: 100px;
   height: 50px;
   border-radius: 20px;
   border: none;
-  background-color: rgb(52, 152, 219);
+  background-color: rgb(255, 204, 80);
 }
 #modalNo {
   width: 100px;
@@ -67,19 +76,21 @@
 .profileSubmit {
   width: 100px;
   height: 40px;
-  background-color: rgb(52, 152, 219);
-  color: white;
+  background-color: rgb(255, 204, 80);
+  color: black;
   border: none;
   border-radius: 10px;
+  font-size: 20px;
 }
 
 .profileSubmit:active {
   width: 100px;
   height: 40px;
-  background-color: rgba(40, 147, 219, 0.41);
+  background-color: rgb(255, 204, 80);
   color: white;
   border: 2px solid gray;
   border-radius: 10px;
+  font-size: 20px;
 }
 
 .profileCancel {
@@ -89,6 +100,7 @@
   color: white;
   border: none;
   border-radius: 10px;
+  font-size: 20px;
 }
 .profileCancel:active {
   width: 100px;
@@ -97,6 +109,7 @@
   border: 2px solid gray;
   color: white;
   border-radius: 10px;
+  font-size: 20px;
 }
 
 .profileSubmit:disabled {
