@@ -1,40 +1,60 @@
 <template>
-  <div class="container header">
-    <a href="./home" class="headerName">4조 가계부</a>
-    <div class="headerRight">
-      <div class="input_date_box">
-        <input
-          id="month"
-          type="month"
-          data-placeholder="날짜 선택"
-          aria-required="true"
-          :value="currentTime"
-        />
-      </div>
-      <div class="profile-wrapper" @click="toggleDropdown" ref="profileWrapper">
-        <img v-if="profileImageUrl" :src="profileImageUrl" class="profile" />
-        <span v-else class="profile material-symbols-outlined">
-          account_circle
-        </span>
-        <div
-          class="dropdown"
-          v-if="isDropdownVisible"
-          @mouseleave="hideDropdown"
-        >
-          <ul>
-            <li>
-              <h3 class="dropdown-name">{{ displayName }} 님</h3>
-            </li>
-            <li @click="goToProfileSetting">
-              <span class="set material-symbols-outlined">설정 settings </span>
-            </li>
-          </ul>
+    <div class="container header">
+        <a href="./home" class="headerName">4조 가계부</a>
+        <div class="headerRight">
+            <div class="input_date_box">
+                <input
+                    id="month"
+                    type="month"
+                    data-placeholder="날짜 선택"
+                    aria-required="true"
+                    :value="currentTime"
+                />
+            </div>
+            <div
+                class="profile-wrapper"
+                @click="toggleDropdown"
+                ref="profileWrapper"
+            >
+                <img
+                    v-if="profileImageUrl"
+                    :src="profileImageUrl"
+                    class="profile"
+                />
+                <span
+                    v-else
+                    class="profile material-symbols-outlined"
+                >
+                    account_circle
+                </span>
+                <div
+                    class="dropdown"
+                    v-if="isDropdownVisible"
+                    @mouseleave="hideDropdown"
+                >
+                    <ul>
+                        <li>
+                            <h3 class="dropdown-name">
+                                {{ displayName }} 님
+                            </h3>
+                        </li>
+                        <li @click="goToProfileSetting">
+                            <span
+                                class="set material-symbols-outlined"
+                                >설정 settings
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pencil-container" @click="goAdd">
+                <span
+                    class="pencil material-symbols-outlined"
+                >
+                    draft_orders
+                </span>
+            </div>
         </div>
-    </div>
-    <div class="pencil-container" @click="goAdd">
-        <span class="pencil material-symbols-outlined">
-            draft_orders
-        </span>
     </div>
 </template>
 
