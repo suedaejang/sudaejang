@@ -1,5 +1,6 @@
 import './assets/main.css';
 import './assets/profileSetting.css';
+import './assets/addChart.css';
 
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';

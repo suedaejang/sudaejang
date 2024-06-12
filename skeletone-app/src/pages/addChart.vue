@@ -124,7 +124,6 @@
                 <div class="btnGroup">
                     <button
                         type="button"
-                        class="btn btn-primary m-1"
                         @click="cancleTransaction"
                     >
                         취소
@@ -132,7 +131,6 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <button
                         type="button"
-                        class="btn btn-primary m-1"
                         @click="saveTransaction"
                     >
                         저장
