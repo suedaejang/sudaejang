@@ -47,14 +47,17 @@
                     </ul>
                 </div>
             </div>
+            <div class="pencil-container" @click="goAdd">
+                <span
+                    class="pencil material-symbols-outlined"
+                >
+                    draft_orders
+                </span>
+            </div>
         </div>
     </div>
-    <div class="pencil-container" @click="goAdd">
-        <span class="pencil material-symbols-outlined">
-            draft_orders
-        </span>
-    </div>
 </template>
+
 <script setup>
 import dayjs from 'dayjs';
 import { useProfileStore } from '@/stores/profileDate.js';
@@ -62,15 +65,19 @@ import { ref, computed } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 import AddChart from '@/pages/addChart.vue';
+
 const store = useProfileStore();
 const router = useRouter();
+
 const currentTime = dayjs().format('YYYY-MM');
+
 const transaction = ref({
     id: 'user1',
     name: '',
     email: '',
     profileImage: '',
 });
+
 const loadTransaction = async () => {
     try {
         const response = await axios.get(
@@ -86,7 +93,9 @@ const loadTransaction = async () => {
         console.error('에러 내용:', error);
     }
 };
+
 const isDropdownVisible = ref(false);
+
 const profileImageUrl = computed(
     () =>
         transaction.value.profileImage ||
@@ -95,18 +104,23 @@ const profileImageUrl = computed(
 const displayName = computed(
     () => transaction.value.name || store.name
 );
+
 const toggleDropdown = () => {
     isDropdownVisible.value = !isDropdownVisible.value;
 };
+
 const goToProfileSetting = () => {
     router.push({ name: 'profileSetting' });
     isDropdownVisible.value = false;
 };
+
 const hideDropdown = () => {
     isDropdownVisible.value = false;
 };
+
 const goAdd = () => {
     router.push('/add');
 };
+
 loadTransaction();
 </script>

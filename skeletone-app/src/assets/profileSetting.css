@@ -28,6 +28,7 @@
   border-radius: 20px;
   border: none;
   background-color: rgb(255, 204, 80);
+  font-size: 20px;
 }
 #modalNo {
   width: 100px;
@@ -35,6 +36,7 @@
   border-radius: 20px;
   border: none;
   background-color: lightgray;
+  font-size: 20px;
 }
 .profileSettings {
   position: relative;
@@ -56,6 +58,16 @@
   width: 50%;
   text-align: left;
   border-collapse: collapse;
+}
+#profileName {
+  font-size: 20px;
+  color: gray;
+  padding: 5px;
+}
+#profileEmail {
+  font-size: 20px;
+  color: gray;
+  padding: 5px;
 }
 
 .profileText {

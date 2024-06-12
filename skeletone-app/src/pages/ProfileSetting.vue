@@ -8,9 +8,7 @@
     <table class="profileList">
       <thead>
         <tr>
-
           <th class="profileText">
-
             이름
             <span class="asterisk" v-if="!transaction.name">*</span>
           </th>
@@ -29,9 +27,7 @@
       <br />
       <tbody>
         <tr>
-
           <th class="profileText">
-
             이메일
             <span class="asterisk" v-if="!transaction.email">*</span>
           </th>

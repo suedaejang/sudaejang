@@ -64,7 +64,7 @@
                             </option>
                         </select>
                     </div>
-
+                    <br />
                     <div class="form-group">
                         <label for="memo">메모</label>
                         <input
