@@ -2,15 +2,12 @@
   <div class="totalBox">
     <div class="totalInfo">
       <div class="nameRow">
-        <div class="col p-3">
-          <h1>가계부 수정(제목)</h1>
-        </div>
+        <h1>가계부 수정(제목)</h1>
       </div>
       <!-- 수정 대상 거래 -->
       <div class="targetRow">
         <p>수정대상 리스트 정보(예정)</p>
       </div>
-
       <!-- 수정 상세 -->
       <div class="infoRow">
         <div class="col">
@@ -102,17 +99,17 @@
               v-model="transaction.time"
             />
           </div>
-          <div class="form-group">
+          <div class="btnsGroup form-group">
             <button
               type="button"
-              class="btn btn-primary m-1"
+              class="editBtnCancle btn btn-primary m-1"
               @click="cancleTransaction"
             >
-              취소
-            </button>
+              취소</button
+            >&nbsp;&nbsp;&nbsp;&nbsp;
             <button
               type="button"
-              class="btn btn-primary m-1"
+              class="editBtnSubmit btn btn-primary m-1"
               @click="saveTransaction"
             >
               저장
@@ -232,7 +229,6 @@ const cancleTransaction = () => {
   text-align: center;
   margin: 0 auto;
   position: absolute;
-  top: 30px;
 }
 .totalBox > .nameRow > div > h2 {
   color: red;
@@ -248,7 +244,7 @@ const cancleTransaction = () => {
   background-color: #cddef1;
   border-radius: 30px;
   position: absolute;
-  top: 70px;
+  top: 60px;
   margin: 0 auto;
   margin-left: 120px;
 }
@@ -258,7 +254,7 @@ const cancleTransaction = () => {
   width: 600px;
   height: 500px;
   position: absolute;
-  top: 200px;
+  top: 170px;
   left: 59px;
 }
 .required::after {
@@ -326,5 +322,45 @@ input[type='time']::-webkit-inner-spin-button {
 input[type='time']::-webkit-calendar-picker-indicator {
   background: transparent;
   z-index: 1;
+}
+
+.editBtnCancle {
+  width: 100px;
+  height: 40px;
+  background-color: lightgray;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+}
+.editBtnCancle:active {
+  width: 100px;
+  height: 40px;
+  background-color: gray;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+}
+.editBtnSubmit {
+  width: 100px;
+  height: 40px;
+  background-color: rgb(255, 204, 80);
+  color: black;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+}
+.editBtnSubmit:active {
+  width: 100px;
+  height: 40px;
+  background-color: lightgray;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+}
+.btnsGroup {
+  margin-left: 200px;
 }
 </style>
