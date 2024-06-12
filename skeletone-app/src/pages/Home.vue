@@ -1,11 +1,6 @@
 <template>
-  <div class="card card-body">
-    <h1>Home</h1>
-  </div>
+  <div class="profileSettings"></div>
+  <br /><br />
 </template>
 
-<script>
-export default {
-  name: 'Home',
-};
-</script>
+<script setup></script>
