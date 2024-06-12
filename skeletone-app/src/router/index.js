@@ -1,25 +1,31 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../pages/Home.vue';
+import ProfileSetting from '@/pages/ProfileSetting.vue';
 import editChart from '@/pages/editChart.vue';
-import Home from '@/pages/Home.vue';
 import addChart from '@/pages/addChart.vue';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
-            path: '/pages/addChart',
-            name: 'addChart',
-            component: addChart,
+            path: '/home',
+            name: 'home',
+            component: Home,
         },
         {
-            path: '/pages/editChart',
+            path: '/profileSetting',
+            name: 'profileSetting',
+            component: ProfileSetting,
+        },
+        {
+            path: '/edit/:id',
             name: 'editChart',
             component: editChart,
         },
         {
-            path: '/',
-            name: 'Home',
-            component: Home,
+            path: '/add',
+            name: 'addChart',
+            component: addChart,
         },
     ],
 });

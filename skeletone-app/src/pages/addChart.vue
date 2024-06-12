@@ -3,7 +3,7 @@
         <div class="totalInfo">
             <div class="nameRow">
                 <div class="col p-3">
-                    <h2>가계부 등록(제목)</h2>
+                    <h2>가계부 등록</h2>
                 </div>
             </div>
             <!-- 수정 상세 -->
@@ -15,7 +15,8 @@
                                 required: !transaction.type,
                             }"
                             for="inNout"
-                            >입출금 구분</label
+                        >
+                            입출금 구분</label
                         >
                         <select
                             class="form-control"
@@ -55,7 +56,7 @@
                                 카테고리
                             </option>
                             <option
-                                v-for="cat in categories"
+                                v-for="cat in states2.todoList"
                                 :key="cat.code"
                                 :value="cat.code"
                             >
@@ -63,6 +64,7 @@
                             </option>
                         </select>
                     </div>
+                    <br />
                     <div class="form-group">
                         <label for="memo">메모</label>
                         <input
@@ -117,22 +119,24 @@
                         />
                         <i class="fa-regular fa-clock"></i>
                     </div>
-                    <div class="form-group">
-                        <button
-                            type="button"
-                            class="btn btn-primary m-1"
-                            @click="cancleTransaction"
-                        >
-                            취소
-                        </button>
-                        <button
-                            type="button"
-                            class="btn btn-primary m-1"
-                            @click="saveTransaction"
-                        >
-                            저장
-                        </button>
-                    </div>
+                    <br />
+                </div>
+                <div class="btnGroup">
+                    <button
+                        type="button"
+                        class="btn btn-primary m-1"
+                        @click="cancleTransaction"
+                    >
+                        취소
+                    </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button
+                        type="button"
+                        class="btn btn-primary m-1"
+                        @click="saveTransaction"
+                    >
+                        저장
+                    </button>
                 </div>
             </div>
         </div>
@@ -140,12 +144,69 @@
 </template>
 
 <script setup>
-import { inject, reactive, provide } from 'vue';
+import { reactive, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
 import axios from 'axios';
 
-const { addTodo } = inject('actions');
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+const id = route.params.id;
+
+const BASEURI = '/api/account';
+const BASEURI2 = '/api/category2';
+const states = reactive({ todoList: [] });
+const states2 = reactive({ todoList2: [] });
+
+const add = async () => {
+    try {
+        const response = await axios.get(BASEURI);
+        if (response.status === 200) {
+            states.todoList = response.data;
+
+            for (
+                let i = 0;
+                i < states.todoList.length;
+                i++
+            ) {
+                if (states.todoList[i].id == id) {
+                    transaction.memo =
+                        states.todoList[i].memo;
+                    transaction.amount =
+                        states.todoList[i].money;
+                    transaction.date =
+                        states.todoList[i].date;
+                    transaction.time =
+                        states.todoList[i].time;
+                }
+            }
+        } else {
+            alert('데이터 조회 실패');
+        }
+    } catch (error) {
+        alert('에러발생 : ' + error);
+    }
+};
+
+const categories = async () => {
+    try {
+        const response = await axios.get(BASEURI2);
+        if (response.status === 200) {
+            states2.todoList = response.data;
+            //   console.log(states2.todoList);
+        } else {
+            alert('데이터 조회 실패');
+        }
+    } catch (error) {
+        alert('에러발생 : ' + error);
+    }
+};
+
+add();
+categories();
+
+const router = useRouter();
 
 const transaction = reactive({
     type: '',
@@ -155,33 +216,45 @@ const transaction = reactive({
     date: '',
 });
 
-const router = useRouter();
-const { chartAdd } = inject('actions');
-// const categories = initialData.category2;
-
+// 저장 하려면 async사용
 const saveTransaction = () => {
     if (
         !transaction.type ||
-        // !transaction.category ||
+        !transaction.category ||
         !transaction.amount ||
         !transaction.date
     ) {
         alert('모든 필수 항목을 입력해주세요.');
         return;
     }
-    chartAdd({ ...transaction }, () => {
-        router.push('/');
-    });
-};
-const cancleTransaction = () => {
-    const userConfirmed =
-        confirm('등록을 취소하시겠습니까?');
-    if (userConfirmed) {
-        router.push('/');
-    }
+    router.push('/Home');
+
+    // try {
+    //     const response = await axios.post(BASEURI, {
+    //         type: transaction.type,
+    //         category: transaction.category,
+    //         memo: transaction.memo,
+    //         amount: transaction.amount,
+    //         date: transaction.date,
+    //         time: transaction.time,
+    //     });
+
+    //     if (response.status === 200) {
+    //         alert('데이터가 성공적으로 저장되었습니다.');
+    //         router.push('/Home');
+    //     } else {
+    //         alert('데이터 저장 실패');
+    //     }
+    // } catch (error) {
+    //     alert('에러 발생 : ' + error);
+    // }
 };
 
-provide('actions', {
-    addTodo,
-});
+const cancleTransaction = () => {
+    const userConfirmed =
+        confirm('기록을 취소하시겠습니까?');
+    if (userConfirmed) {
+        router.push('/Home');
+    }
+};
 </script>
