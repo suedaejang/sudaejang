@@ -1,5 +1,11 @@
+
 <script setup>
-import Header from './components/Header.vue';
+import Header from '@/components/Header.vue';
+import LDH from './pages/LDH.vue';
+import { reactive, computed, provide } from 'vue';
+
+
+// const BASEURI2 = '/api/category2';
 </script>
 
 <template>
@@ -7,3 +13,4 @@ import Header from './components/Header.vue';
   <br />
   <router-view />
 </template>
+
