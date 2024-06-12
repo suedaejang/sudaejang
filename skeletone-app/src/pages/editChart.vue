@@ -3,7 +3,7 @@
     <div class="totalInfo">
       <div class="nameRow">
         <div class="col p-3">
-          <h2>가계부 수정(제목)</h2>
+          <h1>가계부 수정(제목)</h1>
         </div>
       </div>
       <!-- 수정 대상 거래 -->
@@ -14,6 +14,7 @@
       <!-- 수정 상세 -->
       <div class="infoRow">
         <div class="col">
+          <br /><br /><br /><br /><br />
           <div class="form-group">
             <label
               :class="{
@@ -93,7 +94,6 @@
               id="date"
               v-model="transaction.date"
             />
-            <i class="fa-regular fa-calendar-days"></i>
 
             <input
               type="time"
@@ -101,7 +101,6 @@
               id="time"
               v-model="transaction.time"
             />
-            <i class="fa-regular fa-clock"></i>
           </div>
           <div class="form-group">
             <button
@@ -244,18 +243,19 @@ const cancleTransaction = () => {
 
 /* 대상 거래내역 정보 파트 */
 .targetRow {
-  width: 750px;
+  width: 600px;
   height: 130px;
   background-color: #cddef1;
   border-radius: 30px;
   position: absolute;
   top: 70px;
-  left: 54.5px;
+  margin: 0 auto;
+  margin-left: 120px;
 }
 
 /* 세부 입력박스 파트 */
 .infoRow {
-  width: 800px;
+  width: 600px;
   height: 500px;
   position: absolute;
   top: 200px;
@@ -286,5 +286,45 @@ const cancleTransaction = () => {
 }
 i {
   font-size: 35px;
+}
+
+input[type='date'] {
+  position: relative;
+  min-height: 30px;
+  background: url(../assets/calendar.svg) no-repeat right 10px center / 35px
+    auto;
+  padding: 10px 12px;
+  border: 1px solid white;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+input[type='date']::-webkit-clear-button,
+input[type='date']::-webkit-inner-spin-button {
+  display: none;
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  background: transparent;
+  z-index: 1;
+}
+input[type='time'] {
+  position: relative;
+  min-height: 30px;
+  background: url(../assets/clock.svg) no-repeat right 10px center / 35px auto;
+  padding: 10px 12px;
+  border: 1px solid white;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+input[type='time']::-webkit-clear-button,
+input[type='time']::-webkit-inner-spin-button {
+  display: none;
+}
+
+input[type='time']::-webkit-calendar-picker-indicator {
+  background: transparent;
+  z-index: 1;
 }
 </style>
