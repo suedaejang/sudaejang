@@ -25,6 +25,60 @@
       "date": "2024-05-21",
       "time": "15:25",
       "email": "yongwoo@gmail.com"
+    },
+    {
+      "id": "85e6",
+      "type": "o",
+      "category": "b",
+      "memo": "ㅇ",
+      "amount": "ㅇ",
+      "date": "2024-06-20",
+      "time": "14:45"
+    },
+    {
+      "id": "7694",
+      "type": "o",
+      "category": "b",
+      "memo": "ㅇ",
+      "amount": "1232143",
+      "date": "2024-06-20",
+      "time": "14:45"
+    },
+    {
+      "id": "6c64",
+      "type": "o",
+      "category": "c",
+      "memo": "d",
+      "amount": "444",
+      "date": "2024-06-27",
+      "time": "18:01"
+    },
+    {
+      "id": "22a1",
+      "type": "o",
+      "category": "c",
+      "memo": "d",
+      "amount": "200",
+      "date": "2024-06-28",
+      "time": "16:03"
+    },
+    {
+      "id": "facd",
+      "type": "i",
+      "category": "c",
+      "memo": "ddd",
+      "amount": "132",
+      "date": "2024-06-26",
+      "time": ""
+    },
+    {
+      "id": "0ef8",
+      "type": "i",
+      "category": "c",
+      "memo": "ddd",
+      "amount": "132",
+      "date": "2024-06-26",
+      "time": "16:15"
     }
   ],
   "category2": [
