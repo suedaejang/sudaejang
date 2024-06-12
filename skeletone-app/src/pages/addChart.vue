@@ -1,5 +1,5 @@
 <template>
-    <div class="totalBox">
+    <div class="totalBox" style="height: 782px">
         <div class="totalInfo">
             <div class="nameRow">
                 <div class="col p-3">
@@ -64,7 +64,6 @@
                             </option>
                         </select>
                     </div>
-                    <br />
                     <div class="form-group">
                         <label for="memo">메모</label>
                         <input
@@ -107,17 +106,13 @@
                             id="date"
                             v-model="transaction.date"
                         />
-                        <i
-                            class="fa-regular fa-calendar-days"
-                        ></i>
-
                         <input
                             type="time"
                             class="form-control"
                             id="time"
                             v-model="transaction.time"
+                            @change="adjustTime"
                         />
-                        <i class="fa-regular fa-clock"></i>
                     </div>
                     <br />
                 </div>
@@ -148,6 +143,7 @@ import { useRouter } from 'vue-router';
 import axios from 'axios';
 
 import { useRoute } from 'vue-router';
+import { ref } from 'vue';
 
 const route = useRoute();
 const id = route.params.id;
@@ -156,6 +152,16 @@ const BASEURI = '/api/account';
 const BASEURI2 = '/api/category2';
 const states = reactive({ todoList: [] });
 const states2 = reactive({ todoList2: [] });
+const router = useRouter();
+
+const transaction = reactive({
+    type: '',
+    category: '',
+    memo: '',
+    amount: '',
+    date: '',
+    time: '',
+});
 
 const add = async () => {
     try {
@@ -204,18 +210,7 @@ const categories = async () => {
 add();
 categories();
 
-const router = useRouter();
-
-const transaction = reactive({
-    type: '',
-    category: '',
-    memo: '',
-    amount: '',
-    date: '',
-});
-
-// 저장 하려면 async사용
-const saveTransaction = () => {
+const saveTransaction = async () => {
     if (
         !transaction.type ||
         !transaction.category ||
@@ -225,32 +220,34 @@ const saveTransaction = () => {
         alert('모든 필수 항목을 입력해주세요.');
         return;
     }
-    router.push('/Home');
+    const transactionData = {
+        type: transaction.type,
+        category: transaction.category,
+        memo: transaction.memo,
+        amount: transaction.amount,
+        date: transaction.date,
+        time: transaction.time,
+    };
 
-    // try {
-    //     const response = await axios.post(BASEURI, {
-    //         type: transaction.type,
-    //         category: transaction.category,
-    //         memo: transaction.memo,
-    //         amount: transaction.amount,
-    //         date: transaction.date,
-    //         time: transaction.time,
-    //     });
-
-    //     if (response.status === 200) {
-    //         alert('데이터가 성공적으로 저장되었습니다.');
-    //         router.push('/Home');
-    //     } else {
-    //         alert('데이터 저장 실패');
-    //     }
-    // } catch (error) {
-    //     alert('에러 발생 : ' + error);
-    // }
+    try {
+        const response = await axios.post(
+            BASEURI,
+            transactionData
+        );
+        if (response.status === 200) {
+            alert('데이터가 성공적으로 저장되었습니다.');
+            router.push('/Home');
+        } else {
+            alert('데이터 저장 실패');
+        }
+    } catch (error) {
+        alert('에러 발생 : ' + error);
+    }
 };
 
 const cancleTransaction = () => {
     const userConfirmed =
-        confirm('기록을 취소하시겠습니까?');
+        confirm('등록을 취소하시겠습니까?');
     if (userConfirmed) {
         router.push('/Home');
     }
