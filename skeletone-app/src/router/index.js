@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../pages/Home.vue';
 import ProfileSetting from '@/pages/ProfileSetting.vue';
+
 import editChart from '@/pages/editChart.vue';
 import addChart from '@/pages/addChart.vue';
 
@@ -28,6 +29,7 @@ const router = createRouter({
             component: addChart,
         },
     ],
+
 });
 
 export default router;
