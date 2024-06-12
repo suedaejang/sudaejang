@@ -1,0 +1,143 @@
+#modal {
+  width: 300px;
+  height: 140px;
+  margin: 0 auto;
+  margin-top: -500px;
+  background-color: white;
+  border-radius: 20px;
+  border: 1px solid lightgray;
+  box-shadow: 10px 10px 10px 2px gray;
+  position: relative;
+  z-index: 999;
+  text-align: center;
+  padding: 20px;
+}
+#profileEmail {
+  font-size: 20px;
+  padding: 5px;
+  color: gray;
+}
+#profileName {
+  font-size: 20px;
+  padding: 5px;
+  color: gray;
+}
+#modalYes {
+  width: 100px;
+  height: 50px;
+  border-radius: 20px;
+  border: none;
+  background-color: rgb(255, 204, 80);
+}
+#modalNo {
+  width: 100px;
+  height: 50px;
+  border-radius: 20px;
+  border: none;
+  background-color: lightgray;
+}
+.profileSettings {
+  position: relative;
+  width: 859px;
+  height: 782px;
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: 10px 10px 10px 0px rgba(190, 190, 190, 0.48);
+  text-align: center;
+  z-index: 9;
+}
+.profileSubject {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.profileList {
+  margin: 0 auto;
+  width: 50%;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+.profileText {
+  font-size: 32px;
+  font-weight: 700;
+  padding-right: 20px;
+  position: relative;
+  text-align: right;
+}
+
+.asterisk {
+  color: red;
+  font-size: 30px;
+  margin-left: -2px;
+  position: absolute;
+}
+
+.profileSubmit {
+  width: 100px;
+  height: 40px;
+  background-color: rgb(255, 204, 80);
+  color: black;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.profileSubmit:active {
+  width: 100px;
+  height: 40px;
+  background-color: rgb(255, 204, 80);
+  color: white;
+  border: 2px solid gray;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.profileCancel {
+  width: 100px;
+  height: 40px;
+  background-color: lightgray;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+}
+.profileCancel:active {
+  width: 100px;
+  height: 40px;
+  background-color: lightgray;
+  border: 2px solid gray;
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.profileSubmit:disabled {
+  background-color: lightgray;
+}
+
+thead input[type='text'],
+tbody input[type='email'] {
+  width: 300px;
+  height: 40px;
+}
+
+.filebox input[type='file'] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}
+
+.profileFile {
+  border: 10px solid gray;
+  border-radius: 50%;
+}
+
+#profileDbImg {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
