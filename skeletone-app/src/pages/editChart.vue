@@ -15,34 +15,25 @@
       <div class="infoRow">
         <div class="col">
           <div class="form-group">
-            <label
-              :class="{
-                required: !transaction.type,
-              }"
-              for="inNout"
-            >
-              입출금 구분</label
-            >
+            <label :class="{ required: !transaction.type }" for="inNout">
+              입출금 구분
+            </label>
             <select class="form-control" id="inNout" v-model="transaction.type">
-              <option value="" disabled selected>카테고리</option>
+              <option value="" disabled>카테고리</option>
               <option value="o">지출</option>
               <option value="i">수입</option>
             </select>
           </div>
           <div class="form-group">
-            <label
-              :class="{
-                required: !transaction.category,
-              }"
-              for="cate"
-              >카테고리</label
-            >
+            <label :class="{ required: !transaction.category2 }" for="cate">
+              카테고리
+            </label>
             <select
               class="form-control"
               id="cate"
-              v-model="transaction.category"
+              v-model="transaction.category2"
             >
-              <option value="" disabled selected>카테고리</option>
+              <option value="" disabled>카테고리</option>
               <option
                 v-for="cat in states2.todoList"
                 :key="cat.code"
@@ -126,12 +117,9 @@
 </template>
 
 <script setup>
-import { reactive, watch } from 'vue';
-import { useRouter } from 'vue-router';
-
+import { reactive, onMounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import axios from 'axios';
-
-import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const id = route.params.id;
@@ -139,48 +127,7 @@ const id = route.params.id;
 const BASEURI = '/api/account';
 const BASEURI2 = '/api/category2';
 const states = reactive({ todoList: [] });
-const states2 = reactive({ todoList2: [] });
-
-const edit = async () => {
-  try {
-    const response = await axios.get(BASEURI);
-    if (response.status === 200) {
-      states.todoList = response.data;
-
-      for (let i = 0; i < states.todoList.length; i++) {
-        if (states.todoList[i].id == id) {
-          transaction.memo = states.todoList[i].memo;
-          transaction.amount = states.todoList[i].money;
-          transaction.date = states.todoList[i].date;
-          transaction.time = states.todoList[i].time;
-        }
-      }
-    } else {
-      alert('데이터 조회 실패');
-    }
-  } catch (error) {
-    alert('에러발생 : ' + error);
-  }
-};
-
-const categories = async () => {
-  try {
-    const response = await axios.get(BASEURI2);
-    if (response.status === 200) {
-      states2.todoList = response.data;
-      //   console.log(states2.todoList);
-    } else {
-      alert('데이터 조회 실패');
-    }
-  } catch (error) {
-    alert('에러발생 : ' + error);
-  }
-};
-
-edit();
-categories();
-
-const router = useRouter();
+const states2 = reactive({ todoList: [] });
 
 const transaction = reactive({
   type: '',
@@ -188,7 +135,47 @@ const transaction = reactive({
   memo: '',
   amount: '',
   date: '',
+  time: '',
 });
+
+const fetchTransaction = async () => {
+  try {
+    const response = await axios.get(`${BASEURI}/${id}`);
+    if (response.status === 200) {
+      const targetTransaction = response.data;
+      transaction.type = targetTransaction.category1 === 'o' ? 'o' : 'i';
+      transaction.category2 = targetTransaction.category2;
+      transaction.memo = targetTransaction.memo;
+      transaction.amount = targetTransaction.money;
+      transaction.date = targetTransaction.date;
+      transaction.time = targetTransaction.time;
+    } else {
+      alert('데이터 조회 실패');
+    }
+  } catch (error) {
+    alert('에러 발생: ' + error);
+  }
+};
+
+const fetchCategories = async () => {
+  try {
+    const response = await axios.get(BASEURI2);
+    if (response.status === 200) {
+      states2.todoList = response.data;
+    } else {
+      alert('데이터 조회 실패');
+    }
+  } catch (error) {
+    alert('에러 발생: ' + error);
+  }
+};
+
+onMounted(() => {
+  fetchTransaction();
+  fetchCategories();
+});
+
+const router = useRouter();
 
 const saveTransaction = () => {
   if (
@@ -200,8 +187,10 @@ const saveTransaction = () => {
     alert('모든 필수 항목을 입력해주세요.');
     return;
   }
+  // save transaction logic here, e.g., axios.post(BASEURI, transaction)
   router.push('/Home');
 };
+
 const cancleTransaction = () => {
   const userConfirmed = confirm('수정을 취소하시겠습니까?');
   if (userConfirmed) {
