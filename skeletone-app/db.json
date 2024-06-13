@@ -8,7 +8,7 @@
       "total": "10000",
       "category1": "i",
       "category2": "b",
-      "memo": "12312123",
+      "memo": "rr",
       "date": "2024-05-21",
       "time": "14:25",
       "email": "yongwoo@gmail.com"
@@ -307,6 +307,42 @@
       "amount": "111111111111",
       "date": "2024-06-06",
       "time": "23:15"
+    },
+    {
+      "id": "4ad1",
+      "type": "i",
+      "category": "a",
+      "memo": "이번엔 진짜",
+      "amount": "1000",
+      "date": "2024-06-13",
+      "time": "10:39"
+    },
+    {
+      "id": "e08b",
+      "type": "i",
+      "category": "a",
+      "memo": "이번엔 진짜",
+      "amount": "1000",
+      "date": "2024-06-13",
+      "time": "10:39"
+    },
+    {
+      "id": "fffd",
+      "type": "o",
+      "category": "a",
+      "memo": "나혼자",
+      "amount": "4444",
+      "date": "2024-06-05",
+      "time": "00:40"
+    },
+    {
+      "id": "3088",
+      "type": "i",
+      "category": "c",
+      "memo": "ㅁㄴㅇㅁㄴㅇㅁ",
+      "amount": "123123",
+      "date": "2024-05-29",
+      "time": "00:41"
     }
   ],
   "category2": [

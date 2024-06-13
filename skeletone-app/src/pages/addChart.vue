@@ -233,11 +233,11 @@ const saveTransaction = async () => {
     };
 
     try {
-        const response = await axios.get(
+        const response = await axios.post(
             BASEURI,
             transactionData
         );
-        if (response.status === 200) {
+        if (response.status === 201) {
             alert('데이터가 성공적으로 저장되었습니다.');
             router.push('/Home');
         } else {
