@@ -48,24 +48,24 @@
           :key="transaction.id"
           class="transaction"
         >
-          <div class="icon">
+          <div class="icon" style="width: 35px">
             {{ getTransactionIcon(transaction.category1) }}
           </div>
-          <div class="details">
+          <div class="details" style="width: 100px">
             <div
               class="transaction-type"
               :class="transaction.category1 === 'i' ? 'deposit' : 'withdrawal'"
             >
-              {{ transaction.category1 === 'i' ? '입금' : '출금' }}
+              {{ transaction.category1 === 'i' ? '수입' : '지출' }}
             </div>
             <div>{{ getCategoryName(transaction.category) }}</div>
-            <div>{{ transaction.time }}</div>
+            <div style="width: 40px">{{ transaction.time }}</div>
             <div>{{ transaction.description }}</div>
           </div>
-          <div class="category2">
+          <div class="category2" style="width: 50px">
             {{ getCategoryName(transaction.category2) }}
           </div>
-          <div class="memo">
+          <div class="memo" style="width: 300px; margin-left: 150px">
             <i class="fa-regular fa-note-sticky"></i>
             <span>{{ transaction.memo }}</span>
           </div>
@@ -80,6 +80,11 @@
             </div>
             <div class="balance">{{ formatAmount(transaction.balance) }}원</div>
           </div>
+
+          <!-- 수정하기 링크버튼 -->
+          <router-link :to="'/edit/' + transaction.id" class="edit-button">
+            <button>수정하기</button>
+          </router-link>
         </div>
       </div>
     </div>
@@ -208,7 +213,7 @@ const formatTime = (dateStr) => {
 
 const formatAmount = (amount, category1 = null, category2 = null) => {
   if (amount !== null && amount !== undefined) {
-    const sign = category1 === 'i' ? '+' : category1 === 'o' ? '-' : '';
+    const sign = category1 === 'i' ? ' + ' : category1 === 'o' ? ' - ' : '';
     const categoryName = getCategoryName(category2);
     return `${sign}${amount.toLocaleString()} ${categoryName}`;
   } else {
