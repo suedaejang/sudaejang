@@ -77,7 +77,7 @@
             </tbody>
           </table>
           <br />
-          <a class="ldhLink" href="/pages/LDH">자세히</a>
+          <a class="ldhLink" href="/LDH">자세히</a>
         </div>
       </div>
     </div>
