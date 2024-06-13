@@ -1,7 +1,7 @@
 <template>
     <div
         class="totalBox"
-        style="height: 782px; width: 899px"
+        style="height: 782px; width: 899px; top: -15px"
     >
         <div class="totalInfo">
             <div class="nameRow">
@@ -226,10 +226,10 @@ const saveTransaction = async () => {
     const transactionData = {
         type: transaction.type,
         category: transaction.category,
-        memo: transaction.memo,
+        memo: transaction.memo || '',
         amount: transaction.amount,
         date: transaction.date,
-        time: transaction.time,
+        time: transaction.time || '',
     };
 
     try {
@@ -237,7 +237,7 @@ const saveTransaction = async () => {
             BASEURI,
             transactionData
         );
-        if (response.status === 200) {
+        if (response.status === 201) {
             alert('데이터가 성공적으로 저장되었습니다.');
             router.push('/Home');
         } else {

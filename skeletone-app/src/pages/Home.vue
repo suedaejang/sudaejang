@@ -3,38 +3,36 @@
         <div id="app">
             <div class="navigation">
                 <span
-                    @click="showA"
+                    @click="active = 'A'"
                     :class="{
                         clickable: true,
                         active: active === 'A',
                     }"
+                    >이달의 요약</span
                 >
-                    이달의 요약
-                </span>
                 <span
-                    @click="showB"
+                    @click="active = 'B'"
                     :class="{
                         clickable: true,
                         active: active === 'B',
                     }"
+                    >최근 거래 목록</span
                 >
-                    최근 거래 목록
-                </span>
             </div>
             <div v-if="active === 'A'">
                 <div class="container">
                     <div class="row">
-                        <div class="item">
-                            <h2>총 수입</h2>
-                            <p>1,000,000원</p>
-                        </div>
-                        <div class="item">
-                            <h2>총 지출</h2>
-                            <p>1,000,000원</p>
-                        </div>
-                        <div class="item">
-                            <h2>순 수입</h2>
-                            <p>1,000,000원</p>
+                        <div
+                            class="item"
+                            v-for="(
+                                text, index
+                            ) in summaryTexts"
+                            :key="index"
+                        >
+                            <h2>{{ text }}</h2>
+                            <p>
+                                {{ summaryValues[index] }}원
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -54,37 +52,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="td">6월 8일</td>
-                                <td class="td">18:30</td>
-                                <td class="td">60,000원</td>
+                            <tr
+                                v-for="(
+                                    transaction, index
+                                ) in transactions"
+                                :key="index"
+                            >
                                 <td class="td">
-                                    동훈씨에게 입금함
+                                    {{ transaction.date }}
                                 </td>
                                 <td class="td">
-                                    -10,000원
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="td">6월 7일</td>
-                                <td class="td">18:30</td>
-                                <td class="td">80,000원</td>
-                                <td class="td">
-                                    동훈씨에게 입금함
+                                    {{ transaction.time }}
                                 </td>
                                 <td class="td">
-                                    -10,000원
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="td">6월 7일</td>
-                                <td class="td">14:30</td>
-                                <td class="td">90,000원</td>
-                                <td class="td">
-                                    동훈씨에게 입금함
+                                    {{ transaction.amount }}
                                 </td>
                                 <td class="td">
-                                    -10,000원
+                                    {{
+                                        transaction.description
+                                    }}
+                                </td>
+                                <td class="td">
+                                    {{
+                                        transaction.balanceChange
+                                    }}
                                 </td>
                             </tr>
                         </tbody>
@@ -99,15 +90,51 @@
 export default {
     data() {
         return {
-            active: 'A', // 초기값을 'A'로 설정하여 "이달의 요약"을 표시
+            active: 'A',
+            transactions: [
+                {
+                    date: '6월 8일',
+                    time: '18:30',
+                    amount: 60000,
+                    description: '동훈씨에게 입금함',
+                    balanceChange: -10000,
+                },
+                {
+                    date: '6월 7일',
+                    time: '18:30',
+                    amount: 80000,
+                    description: '동훈씨에게 입금함',
+                    balanceChange: -10000,
+                },
+                {
+                    date: '6월 7일',
+                    time: '14:30',
+                    amount: 90000,
+                    description: '동훈씨에게 입금함',
+                    balanceChange: -10000,
+                },
+            ],
         };
     },
-    methods: {
-        showA() {
-            this.active = 'A';
+    computed: {
+        summaryValues() {
+            let totalIncome = 0;
+            let totalExpense = 0;
+            this.transactions.forEach((transaction) => {
+                if (transaction.amount > 0) {
+                    totalIncome += transaction.amount;
+                }
+                if (transaction.balanceChange < 0) {
+                    totalExpense += Math.abs(
+                        transaction.balanceChange
+                    );
+                }
+            });
+            let netIncome = totalIncome - totalExpense;
+            return [totalIncome, totalExpense, netIncome];
         },
-        showB() {
-            this.active = 'B';
+        summaryTexts() {
+            return ['총 수입', '총 지출', '순 수입'];
         },
     },
 };
@@ -121,21 +148,20 @@ export default {
 }
 .navigation {
     display: flex;
-    flex-direction: row; /* 수평 배치 */
-    justify-content: left; /* 왼쪽 정렬 */
-    gap: 20px; /* 요소 사이 간격 */
+    justify-content: left;
+    gap: 20px;
     margin-left: 50px;
 }
 .clickable {
     margin: 50px 0;
     cursor: pointer;
-    color: black; /* 기본 검정색 */
-    font-size: 2em; /* 글씨 크기 키움 */
+    color: black;
+    font-size: 2em;
     font-weight: 700;
 }
 .clickable.active {
-    color: blue; /* 클릭 시 파란색 */
-    text-decoration-line: underline;
+    color: blue;
+    text-decoration: underline;
 }
 .container {
     max-width: 859px;
@@ -154,7 +180,7 @@ export default {
     text-align: center;
     flex: 1;
     margin: 0 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 .item h2 {
     margin-top: 0;
