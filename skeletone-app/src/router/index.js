@@ -29,13 +29,12 @@ const router = createRouter({
             name: 'addChart',
             component: addChart,
         },
-          {
-      path: '/pages/LDH',
-      name: 'LDH',
-      component: LDH,
-    },
+        {
+            path: '/pages/LDH',
+            name: 'LDH',
+            component: LDH,
+        },
     ],
-
 });
 
 export default router;
