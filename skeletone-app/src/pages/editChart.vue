@@ -97,6 +97,35 @@
               id="time"
               v-model="transaction.time"
             />
+
+            <input
+              type="text"
+              class="form-control"
+              id="total"
+              v-model="transaction.total"
+              style="display: none"
+            />
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              v-model="transaction.name"
+              style="display: none"
+            />
+            <input
+              type="text"
+              class="form-control"
+              id="email"
+              v-model="transaction.email"
+              style="display: none"
+            />
+            <input
+              type="text"
+              class="form-control"
+              id="img"
+              v-model="transaction.img"
+              style="display: none"
+            />
           </div>
           <br /><br />
           <div class="btnGroup">
@@ -143,6 +172,10 @@ const fetchTransaction = async () => {
       transaction.amount = targetTransaction.money;
       transaction.date = targetTransaction.date;
       transaction.time = targetTransaction.time;
+      transaction.total = targetTransaction.total;
+      transaction.name = targetTransaction.name;
+      transaction.email = targetTransaction.email;
+      transaction.img = targetTransaction.img;
     } else {
       alert('데이터 조회 실패');
     }
@@ -161,22 +194,6 @@ const fetchCategories = async () => {
     }
   } catch (error) {
     alert('에러 발생: ' + error);
-  }
-};
-
-const updateTodo = async ({ id, todo, desc, done }, successCallback) => {
-  try {
-    const payload = { id, todo, desc, done };
-    const response = await axios.put(BASEURI + `/${id}`, payload);
-    if (response.status === 200) {
-      let index = states.todoList.findIndex((todo) => todo.id === id);
-      states.todoList[index] = payload;
-      successCallback();
-    } else {
-      alert('에러발생 : ' + error);
-    }
-  } catch (error) {
-    alert('에러발생 : ' + error);
   }
 };
 
@@ -201,12 +218,16 @@ const saveTransaction = async () => {
   try {
     const payload = {
       id,
-      type: transaction.type,
+      name: transaction.name,
+      img: transaction.img,
+      money: transaction.amount,
+      total: transaction.total,
+      category1: transaction.type,
       category2: transaction.category2,
       memo: transaction.memo,
-      amount: transaction.amount,
       date: transaction.date,
       time: transaction.time,
+      email: transaction.email,
     };
 
     const response = await axios.put(`${BASEURI}/${id}`, payload);
