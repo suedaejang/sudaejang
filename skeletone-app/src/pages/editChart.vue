@@ -205,6 +205,7 @@ const saveTransaction = () => {
         !transaction.type ||
         !transaction.category ||
         !transaction.amount ||
+        !transaction.time ||
         !transaction.date
     ) {
         alert('모든 필수 항목을 입력해주세요.');

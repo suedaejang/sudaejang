@@ -1,7 +1,7 @@
 <template>
     <div
         class="totalBox"
-        style="height: 782px; width: 899px"
+        style="height: 782px; width: 899px; top: -15px"
     >
         <div class="totalInfo">
             <div class="nameRow">
@@ -226,14 +226,14 @@ const saveTransaction = async () => {
     const transactionData = {
         type: transaction.type,
         category: transaction.category,
-        memo: transaction.memo,
+        memo: transaction.memo || '',
         amount: transaction.amount,
         date: transaction.date,
-        time: transaction.time,
+        time: transaction.time || '',
     };
 
     try {
-        const response = await axios.post(
+        const response = await axios.get(
             BASEURI,
             transactionData
         );
