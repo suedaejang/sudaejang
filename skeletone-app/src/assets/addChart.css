@@ -1,21 +1,10 @@
-/* .totalBox {
-    height: 782px;
-    width: 859px;
-    background-color: white;
-    border-radius: 30px;
-    box-shadow: 10px 10px 10px 0px rgba(190, 190, 190, 0.48);
-    position: relative;
-    top: -15px;
-    overflow: hidden;
-} */
-
 /* 전체 내용 묶음  */
 .totalInfo {
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
-    left: 385.5px;
+    left: 410px;
 }
 
 /* 가계부 수정, 제목 파트 */
@@ -23,11 +12,11 @@
     text-align: center;
     margin: 0 auto;
     height: 60px;
-    width: 429px;
+    width: 160px;
     position: absolute;
     margin-top: 30px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-30%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -76,7 +65,6 @@
     flex: 0 0 150px;
     font-weight: bold;
     font-family: 'Arial', 'Helvetica', sans-serif;
-    /* position: absolute; */
 }
 
 .infoRow .col .form-group select,
@@ -115,7 +103,6 @@ i {
     margin-left: 245.75px;
 }
 
-/* 859px 429.5px 214.75 */
 .btnGroup > button {
     width: 100px;
     height: 40px;

@@ -1,5 +1,8 @@
 <template>
-    <div class="totalBox" style="height: 782px">
+    <div
+        class="totalBox"
+        style="height: 782px; width: 899px"
+    >
         <div class="totalInfo">
             <div class="nameRow">
                 <div class="col p-3">
