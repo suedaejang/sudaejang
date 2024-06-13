@@ -19,6 +19,7 @@
           >이달의 요약</span
         >
       </div>
+      <br /><br />
       <div v-if="active === 'B'">
         <div class="container">
           <div class="row">
@@ -31,7 +32,7 @@
               <p>{{ summaryValues[index] }}원</p>
             </div>
           </div>
-          <br />
+          <br /><br />
           <div class="homeVideo">
             <iframe
               width="700"
