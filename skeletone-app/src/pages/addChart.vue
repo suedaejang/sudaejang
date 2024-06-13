@@ -15,7 +15,8 @@
                     <div class="form-group">
                         <label
                             :class="{
-                                required: !transaction.type,
+                                required:
+                                    !transaction.category1,
                             }"
                             for="inNout"
                         >
@@ -24,7 +25,7 @@
                         <select
                             class="form-control"
                             id="inNout"
-                            v-model="transaction.type"
+                            v-model="transaction.category1"
                         >
                             <option
                                 value=""
@@ -41,7 +42,7 @@
                         <label
                             :class="{
                                 required:
-                                    !transaction.category,
+                                    !transaction.category2,
                             }"
                             for="cate"
                             >카테고리</label
@@ -49,7 +50,7 @@
                         <select
                             class="form-control"
                             id="cate"
-                            v-model="transaction.category"
+                            v-model="transaction.category2"
                         >
                             <option
                                 value=""
@@ -81,7 +82,7 @@
                         <label
                             :class="{
                                 required:
-                                    !transaction.amount,
+                                    !transaction.money,
                             }"
                             for="cash"
                             >금액</label
@@ -90,7 +91,7 @@
                             type="text"
                             class="form-control"
                             id="cash"
-                            v-model="transaction.amount"
+                            v-model="transaction.money"
                             placeholder="금액을 입력해주세요"
                             pattern="\d*"
                         />
@@ -158,10 +159,14 @@ const states2 = reactive({ todoList2: [] });
 const router = useRouter();
 
 const transaction = reactive({
-    type: '',
-    category: '',
+    id: '',
+    name: '',
+    img: '',
+    money: '',
+    total: '',
+    category1: '',
+    category2: '',
     memo: '',
-    amount: '',
     date: '',
     time: '',
 });
@@ -215,21 +220,26 @@ categories();
 
 const saveTransaction = async () => {
     if (
-        !transaction.type ||
-        !transaction.category ||
-        !transaction.amount ||
+        !transaction.category1 ||
+        !transaction.category2 ||
+        !transaction.money ||
         !transaction.date
     ) {
         alert('모든 필수 항목을 입력해주세요.');
         return;
     }
     const transactionData = {
-        type: transaction.type,
-        category: transaction.category,
+        // id: transaction.id || '',
+        name: transaction.name || '',
+        img: transaction.img || '',
+        money: transaction.money,
+        total: transaction.total || '',
+        category1: transaction.category1,
+        category2: transaction.category2,
         memo: transaction.memo || '',
-        amount: transaction.amount,
         date: transaction.date,
         time: transaction.time || '',
+        email: transaction.email || '',
     };
 
     try {
