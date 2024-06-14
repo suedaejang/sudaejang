@@ -1,10 +1,13 @@
 <template>
   <div class="container header">
-    <a href="/home" class="headerName">
-      <img src="../assets/images/lll.PNG" style="width: 90px" /> 가계부
+    <a href="/" class="headerName">
+      <img
+        src="../assets/images/lll.PNG"
+        style="width: 90px; vertical-align: text-bottom"
+      />
+      가계부
     </a>
     <div class="headerRight">
-      <!-- 월 선택 input -->
       <div class="input_date_box">
         <span v-if="monthJ" :class="mainMonth" class="mainMonth">{{
           mainMonth
@@ -18,7 +21,6 @@
           @change="goMonth"
         />
       </div>
-      <!-- 사용자 프로필 드롭다운 -->
       <div class="profile-wrapper" @click="toggleDropdown" ref="profileWrapper">
         <img v-if="profileImageUrl" :src="profileImageUrl" class="profile" />
         <span v-else class="profile material-symbols-outlined"
@@ -39,7 +41,6 @@
           </ul>
         </div>
       </div>
-      <!-- 추가 기능 (예: 거래 추가) -->
       <div class="pencil-container" @click="goAdd">
         <span class="pencil material-symbols-outlined">draft_orders</span>
       </div>
@@ -52,6 +53,7 @@ import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 import { useRouter, useRoute } from 'vue-router';
 import { useProfileStore } from '@/stores/profileDate.js';
+import Home from '@/pages/Home.vue';
 
 const store = useProfileStore();
 const router = useRouter();
@@ -114,7 +116,7 @@ const goAdd = () => {
   router.push('/add');
 };
 const goMonth = () => {
-  router.push({ path: '/home', query: { month: selectedMonth.value } });
+  router.push({ path: '/', query: { month: selectedMonth.value } });
 };
 
 onMounted(() => {

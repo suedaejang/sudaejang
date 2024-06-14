@@ -78,13 +78,16 @@
             >
               {{ formatAmount(transaction.amount, transaction.category1) }}원
             </div>
-            <div class="balance">{{ formatAmount(transaction.balance) }}원</div>
+            <!-- <div class="balance">{{ formatAmount(transaction.balance) }}원</div> -->
           </div>
 
           <!-- 수정하기 링크버튼 -->
           <router-link :to="'/edit/' + transaction.id" class="edit-button">
-            <button>수정하기</button>
+            <button>수정</button>
           </router-link>
+          <div class="edit-button">
+            <button @click="delete2(transaction.id)">삭제</button>
+          </div>
         </div>
       </div>
     </div>
@@ -245,5 +248,18 @@ const sortedFilteredTransactions = computed(() => {
 
 const getTransactionIcon = (category1) => {
   return category1 === 'i' ? '💰' : '💸';
+};
+
+const delete2 = async (id) => {
+  try {
+    const response = await axios.delete(BASEURI + `/${id}`);
+    if (response.status === 200) {
+      location.reload();
+    } else {
+      alert('Todo 삭제 실패');
+    }
+  } catch (error) {
+    alert('에러발생 : ' + error);
+  }
 };
 </script>
